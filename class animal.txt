@@ -1,0 +1,10 @@
+class animal:
+   def speak(self):
+      print("animal speaks")
+class bird(animal):
+   def speak(self):
+      print("Tweet")
+a=animal()
+a.speak()
+b=bird()
+b.speak()

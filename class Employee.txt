@@ -1,0 +1,113 @@
+class Employee:
+    def __init__(self, emp_id, name, dept):
+        self.emp_id = emp_id
+        self.name = name
+        self.dept = dept
+        self.__salary = 0.0
+
+    def set_salary(self, amount):
+        if amount > 0:
+            self.__salary = amount
+
+    def get_salary(self):
+        return self.__salary
+
+    def display_info(self):
+        print("-------------------------")
+        print("ID        :", self.emp_id)
+        print("Name      :", self.name)
+        print("Dept      :", self.dept)
+        print("Salary    :", self.__salary)
+
+
+class FullTimeEmployee(Employee):
+    def __init__(self, emp_id, name, dept, basic_pay):
+        super().__init__(emp_id, name, dept)
+        self.basic_pay = basic_pay
+        self.calculate_salary()
+
+    def calculate_salary(self):
+       hra = 0.20 * self.basic_pay
+       da = 0.10 * self.basic_pay
+       pf = 0.12 * self.basic_pay
+       gross = self.basic_pay + hra + da
+       net_salary = gross - pf
+       self.set_salary(net_salary)
+class PartTimeEmployee(Employee):
+    def __init__(self, emp_id, name, dept, hourly_pay, hours_worked):
+        super().__init__(emp_id, name, dept)
+        self.hourly_pay = hourly_pay
+        self.hours_worked = hours_worked
+        self.calculate_salary()
+
+    def calculate_salary(self):
+        salary = self.hourly_pay * self.hours_worked
+        self.set_salary(salary)
+
+
+class EmployeeManager:
+    def __init__(self):
+        self.employees = []
+
+    def add_full_time_emp(self):
+        emp_id = int(input("Enter Employee ID: "))
+        name = input("Enter Name: ")
+        dept = input("Enter Department: ")
+
+        while True:
+            basic = float(input("Enter Basic Pay: "))
+            if basic <= 0:
+                print("Invalid Basic Pay")
+            else:
+                break
+
+        emp = FullTimeEmployee(emp_id, name, dept, basic)
+        self.employees.append(emp)
+        print("Full Time Employee Added")
+        emp.display_info()
+
+    def add_part_time_emp(self):
+        emp_id = int(input("Enter Employee ID: "))
+        name = input("Enter Name: ")
+        dept = input("Enter Department: ")
+
+        hourly = float(input("Enter Hourly Pay: "))
+        hours = float(input("Enter Hours Worked: "))
+
+        emp = PartTimeEmployee(emp_id, name, dept, hourly, hours)
+        self.employees.append(emp)
+        print("Part Time Employee Added")
+        emp.display_info()
+
+    def display_all(self):
+        if not self.employees:
+            print("No Employees")
+            return
+        for emp in self.employees:
+            emp.display_info()
+
+    def total_payroll(self):
+        total = 0
+        for emp in self.employees:
+            total += emp.get_salary()
+        print("Total Payroll =", total)
+
+    def menu(self):
+        while True:
+            print("\n1.Add Full Time\n2.Add Part Time\n3.Display\n4.Total Payroll\n5.Exit")
+            ch = int(input("Enter Choice: "))
+
+            if ch == 1:
+                self.add_full_time_emp()
+            elif ch == 2:
+                self.add_part_time_emp()
+            elif ch == 3:
+                self.display_all()
+            elif ch == 4:
+                self.total_payroll()
+            elif ch == 5:
+                break
+            else:
+                print("Invalid Choice")
+manager = EmployeeManager()
+manager.menu()

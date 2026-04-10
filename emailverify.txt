@@ -1,0 +1,28 @@
+import re
+def validate_email(email):
+    pattern = r'^[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email)
+def validate_password(password):
+    if len(password) < 8:
+        return False
+    if not re.search(r"[A-Z]", password):
+        return False
+    if not re.search(r"[a-z]", password):
+        return False
+    if not re.search(r"[0-9]", password):
+        return False
+    if not re.search(r"[@#$%&*!]", password):
+        return False
+    return True
+email = input("Enter your email id: ")
+password = input("Enter your password: ")
+
+if validate_email(email):
+    print("VALID email")
+else:
+    print("INVALID email")
+
+if validate_password(password):
+    print("VALID password")
+else:
+    print("INVALID password")

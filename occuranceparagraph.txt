@@ -1,0 +1,68 @@
+paragraph = input("Enter a paragraph: ")
+words = [""] * 100
+counts = [0] * 100
+word_index = 0
+char_index = 0
+current_word = ""
+for ch in paragraph:
+    if ch != ' ':
+        current_word = current_word + ch
+    else:
+        if current_word != "":
+            words[word_index] = current_word
+            counts[word_index] = 1
+            word_index = word_index + 1
+            current_word = ""
+if current_word != "":
+    words[word_index] = current_word
+    counts[word_index] = 1
+    word_index = word_index + 1
+i = 0
+while i < word_index:
+    j = i + 1
+    while j < word_index:
+        if words[i] == words[j]:
+            counts[i] = counts[i] + 1
+
+            k = j
+            while k < word_index - 1:
+                words[k] = words[k + 1]
+                counts[k] = counts[k + 1]
+                k = k + 1
+
+            word_index = word_index - 1
+        else:
+            j = j + 1
+    i = i + 1
+longest_pos = 0
+i = 1
+while i < word_index:
+    c1 = 0
+    for _ in words[i]:
+        c1 = c1 + 1
+    c2 = 0
+    for _ in words[longest_pos]:
+        c2 = c2 + 1
+
+    if c1 > c2:
+        longest_pos = i
+    i = i + 1
+rev = ""
+temp = words[longest_pos]
+i = 0
+count = 0
+for _ in temp:
+    count = count + 1
+
+i = count - 1
+while i >= 0:
+    rev = rev + temp[i]
+    i = i - 1
+print("\nWord Occurrences:")
+i = 0
+while i < word_index:
+    print(words[i], ":", counts[i])
+    i = i + 1
+
+print("\nLongest word:", words[longest_pos])
+print("Reversed longest word:", rev)

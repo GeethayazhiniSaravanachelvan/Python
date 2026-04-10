@@ -1,0 +1,15 @@
+class car:
+   def drive(self):
+      print("Vroom")
+my_car=car()
+my_car.drive()
+[24bcs136@mepcolinux count]$cat fan.py
+class fan:
+   def __init__(self,speed="medium"):
+      self.speed=speed
+   def status(self):
+      print(f" staus is {self.speed}")
+f1=fan()
+f1.status()
+f2=fan("high")
+f2.status()

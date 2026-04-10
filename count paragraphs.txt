@@ -1,0 +1,10 @@
+para=input("Enter the para")
+string=para.split()
+length=0
+count={}
+for i in string:
+   length+=1
+print(length)
+for i in string:
+   if i in word
+print(count)

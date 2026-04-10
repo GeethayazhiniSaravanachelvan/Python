@@ -1,0 +1,9 @@
+from collections import Counter
+import datetime
+
+hours = [datetime.datetime.strptime(x, "%Y-%m-%d %H:%M").hour for x in logins]
+
+c = Counter(hours)
+hour, freq = c.most_common(1)[0]
+
+print(f"{hour} -> {freq} logins")

@@ -1,0 +1,9 @@
+from collections import Counter
+
+dates = ["2026-03-10","2026-03-10","2026-03-11"]
+
+c = Counter(dates)
+
+duplicates = [d for d in c if c[d] > 1]
+
+print(duplicates)

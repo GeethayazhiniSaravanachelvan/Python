@@ -1,0 +1,14 @@
+from collections import defaultdict
+import datetime
+
+dates = ["2026-03-10","2026-03-11","2026-03-12"]
+
+group = defaultdict(list)
+
+for d in dates:
+    dt = datetime.datetime.strptime(d, "%Y-%m-%d")
+    day = dt.strftime("%A")
+    group[day].append(d)
+
+for k,v in group.items():
+    print(k, "→", len(v), "dates")
